@@ -16,6 +16,7 @@ public class TicketsService {
 
     // Used Paginating through lists using cursor pagination
     private static final int PAGE_LIMIT = 25;
+    private int pageNo;
     private final NetworkService networkService;
     String after_cursor;
     String before_cursor;
@@ -26,7 +27,7 @@ public class TicketsService {
         //Initialise the network handler class
         networkService = new NetworkService();
         input = new Scanner(System.in);
-
+        pageNo = 1;
     }
 
     public List<Ticket> getAllTickets(int page) {
@@ -35,17 +36,27 @@ public class TicketsService {
         String resourcePath = "";
         switch (page) {
             case 1:                   // Next page
-                if (!has_more) {
+                if (!has_more && pageNo > 0) {
                     System.out.println(NO_MORE_PAGES.getErrorMessage());
+                } else if(pageNo == 0){
+                    page++;
+                    resourcePath = "tickets.json?page[size]=" + PAGE_LIMIT;
                 } else {
+                    page++;
                     resourcePath = "tickets.json?page[size]=" + PAGE_LIMIT + "&page[after]=" + after_cursor;
                 }
                 break;
             case -1: // Previous page
+            {
+                pageNo--;
                 resourcePath = "tickets.json?page[size]=" + PAGE_LIMIT + "&page[before]=" + before_cursor;
                 break;
+            }
             default: // First page without cursor
+            {
+                pageNo = 1;
                 resourcePath = "tickets.json?page[size]=" + PAGE_LIMIT;
+            }
         }
 
         //get tickets JSON from API
@@ -64,8 +75,10 @@ public class TicketsService {
             //get meta data for pagination
             JSONObject meta = ticketsJSON.getJSONObject("meta");
             has_more = meta.getBoolean("has_more");
-            after_cursor = meta.getString("after_cursor");
-            before_cursor = meta.getString("before_cursor");
+            if (has_more) {
+                after_cursor = meta.getString("after_cursor");
+                before_cursor = meta.getString("before_cursor");
+            }
         } catch (Exception e) {
             System.out.println(NO_META_DATA.getErrorMessage());
             return null;

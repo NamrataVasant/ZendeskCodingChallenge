@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import static com.zendesk.ticket.viewer.error.Error.*;
 
-
 public class TicketViewer {
 
   public static void main(String[] args) {
@@ -42,8 +41,6 @@ public class TicketViewer {
               paging = 1; //next page
             } else if (userResponse.equals("p")) {
               paging = -1; //next page
-            } else {
-              System.out.println(INVALID_INPUT_FOR_TICKET_PAGE_DISPLAY.getErrorMessage());
             }
           } while (true);
           break;
