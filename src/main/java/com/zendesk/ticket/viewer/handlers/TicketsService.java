@@ -39,10 +39,10 @@ public class TicketsService {
                 if (!has_more && pageNo > 0) {
                     System.out.println(NO_MORE_PAGES.getErrorMessage());
                 } else if(pageNo == 0){
-                    page++;
+                    pageNo++;
                     resourcePath = "tickets.json?page[size]=" + PAGE_LIMIT;
                 } else {
-                    page++;
+                    pageNo++;
                     resourcePath = "tickets.json?page[size]=" + PAGE_LIMIT + "&page[after]=" + after_cursor;
                 }
                 break;

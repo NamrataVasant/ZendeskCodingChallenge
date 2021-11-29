@@ -24,12 +24,16 @@ public class TicketViewer {
         case "1":           //Show all tickets
           System.out.println("Fetching tickets, please wait");
           int paging = 0;
+          boolean show = true;
           do {
             //Get all tickets
-            if (ticketsService.getAllTickets(paging) == null) {
-              System.out.println(NO_DATA_FROM_API.getErrorMessage());
-              break;
+            if (show) {
+              if (ticketsService.getAllTickets(paging) == null) {
+                System.out.println(NO_DATA_FROM_API.getErrorMessage());
+                break;
+              }
             }
+            show = true;
 
             //Pagination
             System.out.println(
@@ -41,6 +45,9 @@ public class TicketViewer {
               paging = 1; //next page
             } else if (userResponse.equals("p")) {
               paging = -1; //next page
+            } else {
+              System.out.println(INVALID_INPUT_FOR_TICKET_PAGE_DISPLAY.getErrorMessage());
+              show = false;
             }
           } while (true);
           break;
