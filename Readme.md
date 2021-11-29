@@ -21,7 +21,7 @@ This is a Java maven project created for zendesk intern coding challenge which h
 
 2. mvn compile
 
-3. mvn exec:java -Dexec.mainClass=com.zendesk.ticket.viewer
+3. mvn exec:java -Dexec.mainClass="com.zendesk.ticket.viewer.TicketViewer"
 
 Note: Maven and Java JDK 17 must be installed and reachable from cmdline.
 
