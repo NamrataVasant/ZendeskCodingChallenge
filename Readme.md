@@ -29,6 +29,6 @@ Note: Set the JAVA_HOME environment variable appropriately.
 
 
 ## Configuration needed:
-Please edit the connectionInfo.properties file to enter the correct email, password and subdomain fields beforing executing the program.
+Please edit the connectionInfo.properties file to enter the correct email, password and subdomain fields before executing the program.
 
 Thank you!
