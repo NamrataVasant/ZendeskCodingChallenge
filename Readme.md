@@ -2,7 +2,7 @@
 
 This is a Java maven project created for zendesk intern coding challenge which has an implementation of Zendesk CLI Ticket Viewer.
 
-### Installation steps on IDE:
+### Installation and usage steps on IDE:
 1. Install java JDK 17 on your machine
 
 2. Install maven on your machine
